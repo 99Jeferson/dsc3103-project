@@ -26,7 +26,7 @@ The columns are:
 
 ## 3) Target and candidate features
 
-The most reasonable target variable for a supervised learning task would be:
+The most reasonable target variable is:
 
 - Total Spent
 
