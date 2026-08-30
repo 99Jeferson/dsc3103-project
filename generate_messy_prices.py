@@ -11,5 +11,5 @@ for i in range(1000):
     row = {
 
         "id": i if random.random() > 0.02 else i-1,
-        "date": (base_date + timedelta(days=random.randint(0, 1000))).strftime("%Y-%m-%d") if random.random() > 0.03 else "2020-14-50",
+        "date": (base_date + timedelta(days=random.randint(0, 1000))).strftime("%Y-%m-%d") if random.random() > 0.03 else "2020-14-15"
     }
