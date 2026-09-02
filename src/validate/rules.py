@@ -7,16 +7,16 @@ def rule_positive_price(df):
 
 def rule_duplicate_ids(df):
     """Return rows with duplicate id values."""
-    duplicate_id_mask = df["id"].duplicated(keep=False)
-    duplicates = df[duplicate_id_mask].copy()
+    duplicate_id = df["id"].duplicated(keep=False)
+    duplicates = df[duplicate_id].copy()
     duplicates["Reason"] = "Duplicate ID"
     return duplicates.sort_values("id")
 
 
 def rule_duplicate_rows(df):
     """Return exact duplicate rows (all columns identical)."""
-    duplicate_row_mask = df.duplicated(keep=False)
-    duplicates = df[duplicate_row_mask].copy()
+    duplicate_rows = df.duplicated(keep=False)
+    duplicates = df[duplicate_rows].copy()
     duplicates["Reason"] = "Duplicate Row"
     return duplicates.sort_values(list(df.columns))
 
