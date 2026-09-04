@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def rule_positive_price(df):
     """Return rows with negative prices."""
     neg_prices = df[df["price"] < 0].copy()
@@ -24,21 +27,20 @@ def rule_duplicate_rows(df):
 def rule_valid_date(df):
     """Return rows with invalid dates."""
     invalid_dates = []
-    invalid_rows = df.copy()
-    
     for idx, row in df.iterrows():
         try:
-            # Check for impossible month values (>12)
-            date_str = row["date"]
-            parts = str(date_str).split("-")
-            if len(parts) == 3:
-                year, month, day = int(parts[0]), int(parts[1]), int(parts[2])
-                if month > 12 or month < 1 or day > 31 or day < 1:
-                    invalid_dates.append(idx)
-        except (ValueError, TypeError):
+            date_str = str(row["date"]).strip()
+            parts = date_str.split("-")
+            if len(parts) != 3:
+                invalid_dates.append(idx)
+                continue
+            year, month, day = map(int, parts)
+            if month < 1 or month > 12 or day < 1 or day > 31:
+                invalid_dates.append(idx)
+        except (TypeError, ValueError):
             invalid_dates.append(idx)
-    
-    result = df.iloc[invalid_dates].copy()
+
+    result = df.loc[invalid_dates].copy()
     result["Reason"] = "Invalid Date"
     return result
 
@@ -52,14 +54,8 @@ def rule_missing_market(df):
 
 def rule_known_commodity(df):
     """Return rows with non-canonical commodity spellings."""
-    # Define the canonical forms (most common from the dataset)
-    canonical_forms = {
-        "maize": "MAIZE",
-        "beans": "BEANS",
-    }
-    
-    # Rows that are NOT in the most common forms (MAIZE or BEANS)
-    is_not_canonical = ~df["commodity"].isin(["MAIZE", "BEANS"])
-    result = df[is_not_canonical].copy()
+    cleaned = df["commodity"].astype(str).str.strip()
+    is_not_canonical = ~cleaned.isin(["Maize", "Beans"])
+    result = df.loc[is_not_canonical].copy()
     result["Reason"] = "Inconsistent Commodity"
-    return result
+    return result.sort_values("commodity")
