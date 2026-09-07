@@ -2,18 +2,19 @@ import pandas as pd
 
 
 def rule_positive_price(df):
-    """Return rows with negative prices."""
-    neg_prices = df[df["price"] < 0].copy()
-    neg_prices["Reason"] = "Negative Price"
-    return neg_prices
+    """Return rows whose prices are not strictly positive."""
+    invalid_prices = df[df["price"] <= 0].copy()
+    invalid_prices["Reason"] = "Price must be greater than zero"
+    return invalid_prices
 
 
 def rule_duplicate_ids(df):
-    """Return rows with duplicate id values."""
-    duplicate_id = df["id"].duplicated(keep=False)
+    """Return every row whose identifier is duplicated."""
+    id_column = "record_id" if "record_id" in df.columns else "id"
+    duplicate_id = df[id_column].duplicated(keep=False)
     duplicates = df[duplicate_id].copy()
     duplicates["Reason"] = "Duplicate ID"
-    return duplicates.sort_values("id")
+    return duplicates.sort_values(id_column)
 
 
 def rule_duplicate_rows(df):
@@ -26,21 +27,8 @@ def rule_duplicate_rows(df):
 
 def rule_valid_date(df):
     """Return rows with invalid dates."""
-    invalid_dates = []
-    for idx, row in df.iterrows():
-        try:
-            date_str = str(row["date"]).strip()
-            parts = date_str.split("-")
-            if len(parts) != 3:
-                invalid_dates.append(idx)
-                continue
-            year, month, day = map(int, parts)
-            if month < 1 or month > 12 or day < 1 or day > 31:
-                invalid_dates.append(idx)
-        except (TypeError, ValueError):
-            invalid_dates.append(idx)
-
-    result = df.loc[invalid_dates].copy()
+    parsed_dates = pd.to_datetime(df["date"], errors="coerce", format="%Y-%m-%d")
+    result = df.loc[parsed_dates.isna()].copy()
     result["Reason"] = "Invalid Date"
     return result
 

@@ -1,0 +1,8 @@
+rule,action,rows_affected,reason
+duplicate_rows,reject,10,Removed repeated exact records; retained the first copy.
+duplicate_ids,reject,17,Removed later records sharing a id.
+positive_price,reject,53,A price must be greater than zero.
+valid_date,reject,26,The date must be a real YYYY-MM-DD date.
+missing_market,impute,171,Filled missing markets with the mode: Nakasero.
+known_commodity,normalize,460,Mapped case and whitespace variants to Maize or Beans.
+raw_file_hash,verify,0,Unchanged SHA-256: 15163655efb7b0d2133ebc765e3be4b6878e153aa1e247b37d85f018ec1fc756

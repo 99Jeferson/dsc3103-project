@@ -1,0 +1,3 @@
+# Lab 02 Notes
+
+The cleaner rejected non-positive prices, invalid dates, repeated IDs, and exact duplicate rows because these values cannot be trusted as distinct valid observations. It imputed missing markets with the mode and normalized case and whitespace variants of `Maize` and `Beans`; every action was recorded in `docs/cleaning_log.csv`. A price is treated as an error when it violates the explicit positive-price rule, while an unusual but valid positive value would be investigated as a possible outlier rather than deleted automatically. Leakage would occur if information from validation or future records, such as a target-derived statistic or future market price, were used to construct features before a prediction split.
