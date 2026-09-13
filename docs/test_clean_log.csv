@@ -1,0 +1,3 @@
+rule,action,rows_affected,reason
+missing_market,impute,1,Filled missing markets with the mode: Nakasero.
+known_commodity,normalize,2,Mapped case and whitespace variants to Maize or Beans.

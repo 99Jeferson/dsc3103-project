@@ -1,0 +1,26 @@
+[
+  {
+    "stage": "ingest_source_a",
+    "input_rows": 1010,
+    "output_rows": 1010,
+    "errors": []
+  },
+  {
+    "stage": "ingest_source_b",
+    "input_rows": 3648,
+    "output_rows": 3648,
+    "errors": []
+  },
+  {
+    "stage": "clean_data",
+    "input_rows": 1010,
+    "output_rows": 904,
+    "errors": []
+  },
+  {
+    "stage": "join_market_weather",
+    "input_rows": 904,
+    "output_rows": 904,
+    "errors": []
+  }
+]2026-09-13 19:05:39,799 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet

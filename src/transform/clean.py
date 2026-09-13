@@ -1,16 +1,21 @@
 """Clean prices.csv using the shared validation rules and record every action."""
 
+import sys
 from hashlib import sha256
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 import pandas as pd
 
+from src.common.config import CLEANING_LOG_PATH, MIN_PRICE, PROCESSED_PATH, SOURCE_A_RAW_PATH
 from src.validate import rules
 
-ROOT = Path(__file__).resolve().parents[2]
-RAW_PATH = ROOT / "data" / "raw" / "prices.csv"
-OUTPUT_PATH = ROOT / "data" / "processed" / "prices_clean.parquet"
-LOG_PATH = ROOT / "docs" / "cleaning_log.csv"
+RAW_PATH = SOURCE_A_RAW_PATH
+OUTPUT_PATH = PROCESSED_PATH
+LOG_PATH = CLEANING_LOG_PATH
 
 
 def file_hash(path: Path) -> str:
@@ -21,10 +26,24 @@ def file_hash(path: Path) -> str:
     return digest.hexdigest()
 
 
-def clean_data(path: Path = RAW_PATH, output_path: Path = OUTPUT_PATH) -> tuple[pd.DataFrame, list[dict]]:
+def clean_data(
+    path: Path | str | None = None,
+    output_path: Path | str | None = None,
+    df: pd.DataFrame | None = None,
+    log_path: Path | str | None = None,
+) -> tuple[pd.DataFrame, list[dict]]:
     """Clean the raw file and return the cleaned frame plus an action log."""
-    before_hash = file_hash(path)
-    df = pd.read_csv(path)
+    source_path = Path(path) if path is not None else RAW_PATH
+    output_file = Path(output_path) if output_path is not None else OUTPUT_PATH
+    log_file = Path(log_path) if log_path is not None else LOG_PATH
+
+    if df is None:
+        before_hash = file_hash(source_path)
+        df = pd.read_csv(source_path)
+    else:
+        before_hash = None
+        df = df.copy()
+
     log = []
 
     duplicate_rows = rules.rule_duplicate_rows(df)
@@ -43,7 +62,7 @@ def clean_data(path: Path = RAW_PATH, output_path: Path = OUTPUT_PATH) -> tuple[
     invalid_prices = rules.rule_positive_price(df)
     if not invalid_prices.empty:
         df = df.drop(index=invalid_prices.index)
-        log.append({"rule": "positive_price", "action": "reject", "rows_affected": len(invalid_prices), "reason": "A price must be greater than zero."})
+        log.append({"rule": "positive_price", "action": "reject", "rows_affected": len(invalid_prices), "reason": f"A price must be greater than {MIN_PRICE}."})
 
     invalid_dates = rules.rule_valid_date(df)
     if not invalid_dates.empty:
@@ -56,19 +75,24 @@ def clean_data(path: Path = RAW_PATH, output_path: Path = OUTPUT_PATH) -> tuple[
         df.loc[missing_market.index, "market"] = market_mode
         log.append({"rule": "missing_market", "action": "impute", "rows_affected": len(missing_market), "reason": f"Filled missing markets with the mode: {market_mode}."})
 
+    df["market"] = df["market"].astype(str).str.strip().str.casefold()
+
     inconsistent_commodities = rules.rule_known_commodity(df)
     if not inconsistent_commodities.empty:
         df["commodity"] = df["commodity"].astype(str).str.strip().str.casefold().map({"maize": "Maize", "beans": "Beans"})
         log.append({"rule": "known_commodity", "action": "normalize", "rows_affected": len(inconsistent_commodities), "reason": "Mapped case and whitespace variants to Maize or Beans."})
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    df.to_parquet(output_path, index=False)
-    after_hash = file_hash(path)
-    if before_hash != after_hash:
-        raise RuntimeError("Raw file hash changed during cleaning.")
-    log.append({"rule": "raw_file_hash", "action": "verify", "rows_affected": 0, "reason": f"Unchanged SHA-256: {after_hash}"})
-    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    pd.DataFrame(log).to_csv(LOG_PATH, index=False)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(output_file, index=False)
+
+    if before_hash is not None:
+        after_hash = file_hash(source_path)
+        if before_hash != after_hash:
+            raise RuntimeError("Raw file hash changed during cleaning.")
+        log.append({"rule": "raw_file_hash", "action": "verify", "rows_affected": 0, "reason": f"Unchanged SHA-256: {after_hash}"})
+
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+    pd.DataFrame(log).to_csv(log_file, index=False)
     return df, log
 
 

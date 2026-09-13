@@ -1,13 +1,17 @@
 """Profile the deliberately messy prices file and write a validation report."""
 
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 import pandas as pd
 import matplotlib.pyplot as plt
 
 from src.validate import rules
 
-ROOT = Path(__file__).resolve().parents[2]
 RAW_PATH = ROOT / "data" / "raw" / "prices.csv"
 REPORT_PATH = ROOT / "docs" / "validation_report.md"
 PLOT_PATH = ROOT / "docs" / "price_histogram.png"

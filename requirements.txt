@@ -3,3 +3,4 @@ numpy
 jupyter
 pyarrow
 matplotlib
+pytest
