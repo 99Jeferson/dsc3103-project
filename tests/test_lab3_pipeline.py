@@ -31,3 +31,18 @@ def test_ingest_source_b_rejects_schema_mismatch(tmp_path):
 
     with pytest.raises(ValueError, match="Expected columns"):
         ingest_source_b(str(bad_csv))
+
+
+def test_clean_data_rejects_all_missing_markets(tmp_path):
+    df = pd.DataFrame(
+        {
+            "id": [1],
+            "date": ["2020-01-01"],
+            "market": [None],
+            "commodity": ["Beans"],
+            "price": [500],
+        }
+    )
+
+    with pytest.raises(ValueError, match="every market value is missing"):
+        clean_data(df=df, output_path=tmp_path / "clean.parquet", log_path=tmp_path / "clean.csv")

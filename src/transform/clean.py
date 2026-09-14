@@ -41,7 +41,7 @@ def clean_data(
         before_hash = file_hash(source_path)
         df = pd.read_csv(source_path)
     else:
-        before_hash = None
+        before_hash = file_hash(source_path) if source_path.exists() else None
         df = df.copy()
 
     log = []
@@ -70,8 +70,11 @@ def clean_data(
         log.append({"rule": "valid_date", "action": "reject", "rows_affected": len(invalid_dates), "reason": "The date must be a real YYYY-MM-DD date."})
 
     missing_market = rules.rule_missing_market(df)
+    available_markets = df["market"].dropna()
+    if not missing_market.empty and available_markets.empty:
+        raise ValueError("Cannot impute missing market values because every market value is missing.")
     if not missing_market.empty:
-        market_mode = df["market"].dropna().mode().iloc[0]
+        market_mode = available_markets.mode().iloc[0]
         df.loc[missing_market.index, "market"] = market_mode
         log.append({"rule": "missing_market", "action": "impute", "rows_affected": len(missing_market), "reason": f"Filled missing markets with the mode: {market_mode}."})
 

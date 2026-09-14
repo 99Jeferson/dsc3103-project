@@ -31,7 +31,10 @@ def main() -> None:
     logger.info("ingest_source_b rows_in=%s rows_out=%s", len(source_b), len(source_b))
 
     logger.info("stage=start clean_data")
-    cleaned_df, cleaning_log = clean_data(path=SOURCE_A_RAW_PATH, output_path=PROCESSED_PATH)
+    cleaned_df, cleaning_log = clean_data(
+        df=source_a,
+        output_path=PROCESSED_PATH,
+    )
     append_stage_log(stage_log, "clean_data", len(source_a), len(cleaned_df))
     logger.info("clean_data rows_in=%s rows_out=%s", len(source_a), len(cleaned_df))
 

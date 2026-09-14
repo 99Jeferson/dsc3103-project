@@ -1,0 +1,54 @@
+2026-09-14 10:37:36,598 | INFO | stage=start ingest_source_a
+2026-09-14 10:37:36,615 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-14 10:37:36,615 | INFO | stage=start ingest_source_b
+2026-09-14 10:37:36,639 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-14 10:37:36,640 | INFO | stage=start clean_data
+2026-09-14 10:37:36,731 | INFO | clean_data rows_in=1010 rows_out=904
+2026-09-14 10:37:36,731 | INFO | stage=start join_market_weather
+2026-09-14 10:37:36,749 | INFO | join_market_weather rows_in=904 rows_out=904
+2026-09-14 10:37:36,751 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-14 11:14:28,704 | INFO | stage=start ingest_source_a
+2026-09-14 11:14:28,718 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-14 11:14:28,718 | INFO | stage=start ingest_source_b
+2026-09-14 11:14:28,739 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-14 11:14:28,740 | INFO | stage=start clean_data
+2026-09-14 11:14:29,131 | INFO | clean_data rows_in=1010 rows_out=904
+2026-09-14 11:14:29,132 | INFO | stage=start join_market_weather
+2026-09-14 11:14:29,146 | INFO | join_market_weather rows_in=904 rows_out=904
+2026-09-14 11:14:29,147 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-14 11:19:40,836 | INFO | stage=start ingest_source_a
+2026-09-14 11:19:40,848 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-14 11:19:40,849 | INFO | stage=start ingest_source_b
+2026-09-14 11:19:40,874 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-14 11:19:40,874 | INFO | stage=start clean_data
+2026-09-14 11:19:40,957 | INFO | clean_data rows_in=1010 rows_out=904
+2026-09-14 11:19:40,957 | INFO | stage=start join_market_weather
+2026-09-14 11:19:40,982 | INFO | join_market_weather rows_in=904 rows_out=904
+2026-09-14 11:19:40,985 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-14 11:20:37,345 | INFO | stage=start ingest_source_a
+2026-09-14 11:20:37,358 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-14 11:20:37,358 | INFO | stage=start ingest_source_b
+2026-09-14 11:20:37,378 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-14 11:20:37,379 | INFO | stage=start clean_data
+2026-09-14 11:20:37,469 | INFO | clean_data rows_in=1010 rows_out=904
+2026-09-14 11:20:37,470 | INFO | stage=start join_market_weather
+2026-09-14 11:20:37,491 | INFO | join_market_weather rows_in=904 rows_out=904
+2026-09-14 11:20:37,493 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-14 11:20:58,376 | INFO | stage=start ingest_source_a
+2026-09-14 11:20:58,387 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-14 11:20:58,388 | INFO | stage=start ingest_source_b
+2026-09-14 11:20:58,416 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-14 11:20:58,417 | INFO | stage=start clean_data
+2026-09-14 11:20:58,497 | INFO | clean_data rows_in=1010 rows_out=904
+2026-09-14 11:20:58,497 | INFO | stage=start join_market_weather
+2026-09-14 11:20:58,519 | INFO | join_market_weather rows_in=904 rows_out=904
+2026-09-14 11:20:58,521 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-14 11:21:00,625 | INFO | stage=start ingest_source_a
+2026-09-14 11:21:00,638 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-14 11:21:00,638 | INFO | stage=start ingest_source_b
+2026-09-14 11:21:00,656 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-14 11:21:00,657 | INFO | stage=start clean_data
+2026-09-14 11:21:00,739 | INFO | clean_data rows_in=1010 rows_out=904
+2026-09-14 11:21:00,740 | INFO | stage=start join_market_weather
+2026-09-14 11:21:00,766 | INFO | join_market_weather rows_in=904 rows_out=904
+2026-09-14 11:21:00,770 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet

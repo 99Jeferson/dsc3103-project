@@ -4,7 +4,7 @@ import json
 import logging
 from pathlib import Path
 
-from src.common.config import PIPELINE_LOG_PATH
+from src.common.config import PIPELINE_LOG_PATH, PIPELINE_TEXT_LOG_PATH
 
 
 def build_logger(name: str = "dsc3103_pipeline") -> logging.Logger:
@@ -14,7 +14,7 @@ def build_logger(name: str = "dsc3103_pipeline") -> logging.Logger:
 
     formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
 
-    file_path = Path(PIPELINE_LOG_PATH)
+    file_path = Path(PIPELINE_TEXT_LOG_PATH)
     file_path.parent.mkdir(parents=True, exist_ok=True)
     file_handler = logging.FileHandler(file_path, mode="a", encoding="utf-8")
     file_handler.setFormatter(formatter)
