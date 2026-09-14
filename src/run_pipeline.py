@@ -9,7 +9,7 @@ if str(ROOT) not in sys.path:
 
 import pandas as pd
 
-from src.common.config import FINAL_PROCESSED_PATH, PIPELINE_LOG_PATH, PROCESSED_PATH, SOURCE_A_RAW_PATH, SOURCE_B_RAW_PATH
+from src.common.config import FINAL_PROCESSED_PATH, PIPELINE_LOG_PATH, PROCESSED_PATH, SOURCE_A_RAW_PATH
 from src.common.logging_setup import append_stage_log, build_logger, write_json_log
 from src.ingest.source_a import ingest_source_a
 from src.ingest.source_b import ingest_source_b
@@ -26,7 +26,7 @@ def main() -> None:
     logger.info("ingest_source_a rows_in=%s rows_out=%s", len(source_a), len(source_a))
 
     logger.info("stage=start ingest_source_b")
-    source_b = ingest_source_b(SOURCE_B_RAW_PATH)
+    source_b = ingest_source_b()
     append_stage_log(stage_log, "ingest_source_b", len(source_b), len(source_b))
     logger.info("ingest_source_b rows_in=%s rows_out=%s", len(source_b), len(source_b))
 

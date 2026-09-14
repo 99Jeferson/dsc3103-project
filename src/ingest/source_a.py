@@ -19,3 +19,10 @@ def ingest_source_a(path: str | Path = SOURCE_A_RAW_PATH) -> pd.DataFrame:
     if missing:
         raise ValueError(f"Source A schema mismatch: missing columns {sorted(missing)}")
     return df.copy()
+
+
+if __name__ == "__main__":
+    prices = ingest_source_a()
+    print(f"Source A loaded: {len(prices)} rows")
+    print(f"Columns: {', '.join(prices.columns)}")
+    print(f"Input: {SOURCE_A_RAW_PATH}")

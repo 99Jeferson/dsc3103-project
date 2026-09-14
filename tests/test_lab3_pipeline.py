@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
+from src.ingest import source_b
 from src.ingest.source_b import ingest_source_b
 from src.transform.clean import clean_data
 
@@ -31,6 +32,34 @@ def test_ingest_source_b_rejects_schema_mismatch(tmp_path):
 
     with pytest.raises(ValueError, match="Expected columns"):
         ingest_source_b(str(bad_csv))
+
+
+def test_get_mkt_rainfall_parses_open_meteo_response(monkeypatch):
+    class FakeResponse:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return False
+
+        def read(self):
+            return b'{"daily": {"time": ["2020-01-01"], "precipitation_sum": [4.2]}}'
+
+    requested = {}
+
+    def fake_urlopen(url, timeout):
+        requested["url"] = url
+        requested["timeout"] = timeout
+        return FakeResponse()
+
+    monkeypatch.setattr(source_b, "urlopen", fake_urlopen)
+    result = source_b.get_mkt_rainfall("mukono", 0.3533, 32.7556, "2020-01-01", "2020-01-01")
+
+    assert result.to_dict("records") == [
+        {"market": "mukono", "date": "2020-01-01", "rainfall_mm": 4.2}
+    ]
+    assert "precipitation_sum" in requested["url"]
+    assert "latitude=0.3533" in requested["url"]
 
 
 def test_clean_data_rejects_all_missing_markets(tmp_path):

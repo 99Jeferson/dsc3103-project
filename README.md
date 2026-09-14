@@ -30,9 +30,11 @@ From the repository root, run the single documented entry point:
 
 	python -m src.run_pipeline
 
-The pipeline reads `data/raw/prices.csv` and `data/raw/rainfall.csv`, validates
-their schemas, cleans invalid price records and categories, imputes missing
-markets, joins both sources on `market` and `date`, and overwrites these outputs:
+The pipeline reads `data/raw/prices.csv` and fetches Source B from the Open-Meteo
+Historical Weather API. The API response is cached as `data/raw/rainfall.csv`.
+The pipeline validates both sources, cleans invalid price records and categories,
+imputes missing markets, joins both sources on `market` and `date`, and overwrites
+these outputs:
 
 - `data/processed/prices_clean.parquet`
 - `data/processed/market_prices_with_rainfall.parquet`
@@ -43,11 +45,21 @@ markets, joins both sources on `market` and `date`, and overwrites these outputs
 Overwrite semantics make repeated runs idempotent: rerunning the command rebuilds
 the outputs from the raw inputs without appending duplicate rows.
 
+The rainfall API is configured through `RAINFALL_URL`, `RAINFALL_START_DATE`,
+`RAINFALL_END_DATE`, and `RAINFALL_TIMEZONE`. Set `RAINFALL_SOURCE=csv` to run
+offline from the cached rainfall file instead.
+
 ## Data
 
 The raw dataset is stored in `data/raw/dirty_cafe_sales.csv` and has been left unmodified as received.
 
 ## Tests
+
+The individual stages can also be run directly and print a summary:
+
+	python -m src.ingest.source_a
+	python -m src.ingest.source_b
+	python -m src.validate.rules
 
 Run the fast unit tests with:
 

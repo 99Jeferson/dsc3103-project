@@ -17,7 +17,9 @@ MARKET_COORDS = {"mukono": (0.3533, 32.7556), "bwais": (0.3475, 32.5761), "nakas
 
 RAINFALL_START_DATE = os.getenv("RAINFALL_START_DATE", "2020-01-01")
 RAINFALL_END_DATE = os.getenv("RAINFALL_END_DATE", "2022-06-30")
-RAINFALL_URL = os.getenv("RAINFALL_URL", "")
+RAINFALL_URL = os.getenv("RAINFALL_URL", "https://archive-api.open-meteo.com/v1/archive")
+RAINFALL_TIMEZONE = os.getenv("RAINFALL_TIMEZONE", "Africa/Nairobi")
+RAINFALL_SOURCE = os.getenv("RAINFALL_SOURCE", "api")
 
 MIN_PRICE = float(os.getenv("MIN_PRICE", "0"))
 PRICE_RULE_SEVERITY = os.getenv("PRICE_RULE_SEVERITY", "quarantine")
@@ -35,6 +37,8 @@ __all__ = [
     "RAINFALL_START_DATE",
     "RAINFALL_END_DATE",
     "RAINFALL_URL",
+    "RAINFALL_TIMEZONE",
+    "RAINFALL_SOURCE",
     "MIN_PRICE",
     "PRICE_RULE_SEVERITY",
 ]

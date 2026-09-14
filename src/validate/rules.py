@@ -47,3 +47,20 @@ def rule_known_commodity(df):
     result = df.loc[is_not_canonical].copy()
     result["Reason"] = "Inconsistent Commodity"
     return result.sort_values("commodity")
+
+
+if __name__ == "__main__":
+    from src.common.config import SOURCE_A_RAW_PATH
+
+    prices = pd.read_csv(SOURCE_A_RAW_PATH)
+    checks = {
+        "positive_price": rule_positive_price(prices),
+        "duplicate_ids": rule_duplicate_ids(prices),
+        "duplicate_rows": rule_duplicate_rows(prices),
+        "valid_date": rule_valid_date(prices),
+        "missing_market": rule_missing_market(prices),
+        "known_commodity": rule_known_commodity(prices),
+    }
+    print(f"Validated Source A: {len(prices)} rows")
+    for name, failures in checks.items():
+        print(f"{name}: {len(failures)} affected rows")
