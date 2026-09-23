@@ -25,7 +25,7 @@
 | `duplicate_rows` | 20 | Reject exact duplicate rows |
 | `valid_date` | 29 | Reject rows with invalid dates |
 | `missing_market` | 189 | Impute the market with the mode |
-| `known_commodity` | 516 | Normalize commodity spelling/case |
+| `known_commodity` | 1010 | Normalize commodity spelling/case |
 
 ### Inconsistent categories
 
