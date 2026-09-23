@@ -9,6 +9,7 @@ from src.validate.rules import (
     rule_known_commodity,
 )
 from src.ingest.source_a import ingest_source_a 
+from src.ingest.source_b import ingest_source_b
 # Loading the dataset
 df = pd.read_csv("data/raw/prices.csv")
 
@@ -73,9 +74,12 @@ print(f"Invalid Dates: {len(invalid_dates)}")
 print(f"Missing Market: {len(missing_mkt)}")
 print(f"Inconsistent Commodity: {len(bad_commodity)}")
 print(f"Total quality issues: {len(neg_prices) + len(dup_ids) + len(dup_rows) + len(invalid_dates) + len(missing_mkt) + len(bad_commodity)}")
+#%
 #%%
 source_a = ingest_source_a() 
 print(source_a.shape)
+source_a = ingest_source_b() 
+print(ingest_source_b.head)
 
 
 # %%

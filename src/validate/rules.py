@@ -48,7 +48,6 @@ def rule_known_commodity(df):
     result["Reason"] = "Inconsistent Commodity"
     return result.sort_values("commodity")
 
-
 if __name__ == "__main__":
     from src.common.config import SOURCE_A_RAW_PATH
 
