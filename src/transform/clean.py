@@ -14,8 +14,16 @@ from src.validate import rules
 RAW_PATH = "data/raw/prices.csv"
 OUTPUT_PATH = "data/processed/prices_clean.parquet"
 
-def clean_data(path=RAW_PATH):
-    df = pd.read_csv(path)
+def clean_data(
+    df=None,
+    path=RAW_PATH,
+    output_path=OUTPUT_PATH,
+    log_path="docs/cleaning_log.csv",
+):
+    if df is None:
+        df = pd.read_csv(path)
+    else:
+        df = df.copy()
     log = []
 
     # 1. exact duplicate rows
@@ -63,13 +71,14 @@ def clean_data(path=RAW_PATH):
     missing_markets = rules.rule_missing_market(df)
     if not missing_markets.empty:
         mode_market = df["market"].dropna().astype(str).str.strip().mode()
-        if not mode_market.empty:
-            df.loc[missing_markets.index, "market"] = mode_market.iloc[0]
-            log.append({
-                "rule": "rule_missing_market",
-                "action": "impute",
-                "rows_affected": len(missing_markets),
-            })
+        if mode_market.empty:
+            raise ValueError("every market value is missing; cannot impute market")
+        df.loc[missing_markets.index, "market"] = mode_market.iloc[0]
+        log.append({
+            "rule": "missing_market",
+            "action": "impute",
+            "rows_affected": len(missing_markets),
+        })
 
     # 6. commodity normalization
     if "commodity" in df.columns:
@@ -91,7 +100,13 @@ def clean_data(path=RAW_PATH):
                 "rows_affected": len(commodity_issues),
             })
 
-    df.to_parquet(OUTPUT_PATH, index=False)
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(output_path, index=False)
+    if log_path is not None:
+        log_path = Path(log_path)
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        pd.DataFrame(log).to_csv(log_path, index=False)
     return df, log
 
 

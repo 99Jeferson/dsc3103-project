@@ -49,6 +49,45 @@ The rainfall API is configured through `RAINFALL_URL`, `RAINFALL_START_DATE`,
 `RAINFALL_END_DATE`, and `RAINFALL_TIMEZONE`. Set `RAINFALL_SOURCE=csv` to run
 offline from the cached rainfall file instead.
 
+## Inspect Parquet outputs
+
+Parquet is a binary columnar data format, so the files are not meant to be
+opened in VS Code's text editor. The message saying that the file is binary is
+normal and does not indicate that the file is broken.
+
+Use pandas to inspect a Parquet file as a table from the repository root:
+
+```python
+import pandas as pd
+
+path = "data/processed/market_prices_with_rainfall.parquet"
+df = pd.read_parquet(path)
+print(df.shape)
+print(df.dtypes)
+print(df.head(10))
+```
+
+The same commands can be run in a notebook, or in a Python file with:
+
+```text
+python -c "import pandas as pd; print(pd.read_parquet('data/processed/market_prices_with_rainfall.parquet').head())"
+```
+
+The generated files are:
+
+- `prices_clean.parquet`: cleaned prices before the rainfall join.
+- `market_prices_with_rainfall.parquet`: the pipeline's final joined output.
+- `prices_with_rainfall.parquet`: output from the standalone join script.
+
+If a spreadsheet or text editor is required, convert a copy rather than
+changing the pipeline output:
+
+```python
+pd.read_parquet("data/processed/market_prices_with_rainfall.parquet").to_csv(
+	"data/processed/market_prices_with_rainfall.csv", index=False
+)
+```
+
 ## Data
 
 The raw dataset is stored in `data/raw/dirty_cafe_sales.csv` and has been left unmodified as received.

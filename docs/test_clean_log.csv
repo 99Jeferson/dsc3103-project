@@ -1,4 +1,2 @@
-rule,action,rows_affected,reason
-missing_market,impute,1,Filled missing markets with the mode: Nakasero.
-known_commodity,normalize,2,Mapped case and whitespace variants to Maize or Beans.
-raw_file_hash,verify,0,Unchanged SHA-256: 15163655efb7b0d2133ebc765e3be4b6878e153aa1e247b37d85f018ec1fc756
+rule,action,rows_affected
+missing_market,impute,1
