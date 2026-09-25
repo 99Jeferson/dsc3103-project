@@ -78,8 +78,9 @@ print(f"Total quality issues: {len(neg_prices) + len(dup_ids) + len(dup_rows) + 
 #%%
 source_a = ingest_source_a() 
 print(source_a.shape)
-source_a = ingest_source_b() 
-print(ingest_source_b.head)
+source_b = ingest_source_b()
+print(source_b.shape)
+print(source_b.head())
 
 
 # %%

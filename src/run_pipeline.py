@@ -3,18 +3,17 @@
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1]TH
+R
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-
-import pandas as pd
 
 from src.common.config import FINAL_PROCESSED_PATH, PIPELINE_LOG_PATH, PROCESSED_PATH, SOURCE_A_RAW_PATH
 from src.common.logging_setup import append_stage_log, build_logger, write_json_log
 from src.ingest.source_a import ingest_source_a
 from src.ingest.source_b import ingest_source_b
 from src.transform.clean import clean_data
-
+from src.transform.merge import merge_prices_with_rainfall
 
 def main() -> None:
     logger = build_logger("dsc3103_pipeline")
@@ -39,9 +38,7 @@ def main() -> None:
     logger.info("clean_data rows_in=%s rows_out=%s", len(source_a), len(cleaned_df))
 
     logger.info("stage=start join_market_weather")
-    cleaned_df["market"] = cleaned_df["market"].astype(str).str.strip().str.casefold()
-    source_b["market"] = source_b["market"].astype(str).str.strip().str.casefold()
-    merged = cleaned_df.merge(source_b, how="left", on=["market", "date"])
+    merged = merge_prices_with_rainfall(cleaned_df, source_b)
     final_path = FINAL_PROCESSED_PATH
     final_path.parent.mkdir(parents=True, exist_ok=True)
     merged.to_parquet(final_path, index=False)
@@ -58,3 +55,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+

@@ -14,13 +14,13 @@
   {
     "stage": "clean_data",
     "input_rows": 1010,
-    "output_rows": 904,
+    "output_rows": 887,
     "errors": []
   },
   {
     "stage": "join_market_weather",
-    "input_rows": 904,
-    "output_rows": 904,
+    "input_rows": 887,
+    "output_rows": 887,
     "errors": []
   }
 ]

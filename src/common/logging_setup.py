@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-
 from src.common.config import PIPELINE_LOG_PATH, PIPELINE_TEXT_LOG_PATH
 
 
@@ -39,3 +38,4 @@ def append_stage_log(entries: list[dict], stage: str, input_rows: int, output_ro
 def write_json_log(entries: list[dict], path: Path = PIPELINE_LOG_PATH) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(entries, indent=2), encoding="utf-8")
+

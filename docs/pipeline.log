@@ -70,3 +70,57 @@
 2026-09-14 15:51:24,634 | INFO | stage=start join_market_weather
 2026-09-14 15:51:24,660 | INFO | join_market_weather rows_in=904 rows_out=904
 2026-09-14 15:51:24,662 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-25 12:34:42,768 | INFO | stage=start ingest_source_a
+2026-09-25 12:34:42,782 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-25 12:34:42,783 | INFO | stage=start ingest_source_b
+2026-09-25 12:34:47,378 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-25 12:34:47,379 | INFO | stage=start clean_data
+2026-09-25 12:34:47,931 | INFO | clean_data rows_in=1010 rows_out=887
+2026-09-25 12:34:47,932 | INFO | stage=start join_market_weather
+2026-09-25 12:34:47,965 | INFO | join_market_weather rows_in=887 rows_out=887
+2026-09-25 12:34:47,967 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-25 12:46:24,444 | INFO | stage=start ingest_source_a
+2026-09-25 12:46:24,460 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-25 12:46:24,460 | INFO | stage=start ingest_source_b
+2026-09-25 12:46:28,757 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-25 12:46:28,759 | INFO | stage=start clean_data
+2026-09-25 12:46:28,823 | INFO | clean_data rows_in=1010 rows_out=887
+2026-09-25 12:46:28,824 | INFO | stage=start join_market_weather
+2026-09-25 12:46:28,850 | INFO | join_market_weather rows_in=887 rows_out=887
+2026-09-25 12:46:28,852 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-25 12:54:31,251 | INFO | stage=start ingest_source_a
+2026-09-25 12:54:31,277 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-25 12:54:31,278 | INFO | stage=start ingest_source_b
+2026-09-25 12:54:31,359 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-25 12:54:31,360 | INFO | stage=start clean_data
+2026-09-25 12:54:31,490 | INFO | clean_data rows_in=1010 rows_out=887
+2026-09-25 12:54:31,492 | INFO | stage=start join_market_weather
+2026-09-25 12:54:31,525 | INFO | join_market_weather rows_in=887 rows_out=887
+2026-09-25 12:54:31,528 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-25 12:55:38,712 | INFO | stage=start ingest_source_a
+2026-09-25 12:55:38,735 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-25 12:55:38,735 | INFO | stage=start ingest_source_b
+2026-09-25 12:55:38,777 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-25 12:55:38,778 | INFO | stage=start clean_data
+2026-09-25 12:55:39,226 | INFO | clean_data rows_in=1010 rows_out=887
+2026-09-25 12:55:39,226 | INFO | stage=start join_market_weather
+2026-09-25 12:55:39,242 | INFO | join_market_weather rows_in=887 rows_out=887
+2026-09-25 12:55:39,243 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-25 12:58:19,306 | INFO | stage=start ingest_source_a
+2026-09-25 12:58:19,338 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-25 12:58:19,338 | INFO | stage=start ingest_source_b
+2026-09-25 12:58:19,386 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-25 12:58:19,386 | INFO | stage=start clean_data
+2026-09-25 12:58:19,520 | INFO | clean_data rows_in=1010 rows_out=887
+2026-09-25 12:58:19,522 | INFO | stage=start join_market_weather
+2026-09-25 12:58:19,573 | INFO | join_market_weather rows_in=887 rows_out=887
+2026-09-25 12:58:19,575 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
+2026-09-25 13:01:07,570 | INFO | stage=start ingest_source_a
+2026-09-25 13:01:07,615 | INFO | ingest_source_a rows_in=1010 rows_out=1010
+2026-09-25 13:01:07,616 | INFO | stage=start ingest_source_b
+2026-09-25 13:01:07,688 | INFO | ingest_source_b rows_in=3648 rows_out=3648
+2026-09-25 13:01:07,689 | INFO | stage=start clean_data
+2026-09-25 13:01:07,875 | INFO | clean_data rows_in=1010 rows_out=887
+2026-09-25 13:01:07,875 | INFO | stage=start join_market_weather
+2026-09-25 13:01:07,903 | INFO | join_market_weather rows_in=887 rows_out=887
+2026-09-25 13:01:07,904 | INFO | pipeline complete output=C:\Users\HP\dsc3103-project\data\processed\market_prices_with_rainfall.parquet
