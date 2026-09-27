@@ -9,7 +9,7 @@ from src.common.config import SOURCE_A_RAW_PATH
 
 def ingest_source_a(path: str | Path = SOURCE_A_RAW_PATH) -> pd.DataFrame:
     """Read the raw prices table and validate the expected schema."""
-    file_path = Path(path)
+    file_path = Path(path) #we use Path here to ensure that the path is a Path object, which allows us to use methods like exists() and is_file() to check if the file exists and is a file. This is important for validating the input before attempting to read it with pandas.
     if not file_path.exists():
         raise FileNotFoundError(f"Source A file not found: {file_path}")
 

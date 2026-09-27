@@ -1,2 +1,0 @@
-rule,action,rows_affected
-missing_market,impute,1

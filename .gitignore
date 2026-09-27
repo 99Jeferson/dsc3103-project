@@ -1,0 +1,15 @@
+# Python bytecode and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local environments
+.venv/
+.venv-*/
+venv/
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# DuckDB write-ahead logs
+*.duckdb.wal

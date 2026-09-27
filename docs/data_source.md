@@ -1,46 +1,13 @@
-# Data source classification
+# Data sources
 
-## 1) Data type
+## Market prices (Source A)
 
-This file is best classified as structured data.
+The active raw source is `data/raw/prices.csv`, a structured CSV with one market-price observation per row. Its columns are `id`, `date`, `market`, `commodity`, and `price`. The ETL pipeline validates and cleans these records before joining them to rainfall.
 
-Why:
-- It is stored as a CSV table with a consistent row-and-column layout.
-- Each row represents one transaction, and each column has a defined meaning.
-- The dataset follows a tabular schema, even though some cells contain missing or invalid entries.
+## Rainfall (Source B)
 
-The file is not fully unstructured because it is not free text or an arbitrary document. It is also not semi-structured in the usual sense of JSON logs or nested key-value records; it is a regular spreadsheet-style table with a clear schema.
+The pipeline obtains daily rainfall from the Open-Meteo Historical Weather API for configured markets. It caches the result in `data/raw/rainfall.csv`, with columns `market`, `date`, and `rainfall_mm`. Set `RAINFALL_SOURCE=csv` to reuse that cache offline.
 
-## 2) Variables in the dataset
+## Lab 4 assignment input
 
-The columns are:
-
-- Transaction ID: unique identifier for each sale record.
-- Item: product sold (for example, coffee, cake, salad, juice, sandwich, etc.).
-- Quantity: number of units purchased in the transaction.
-- Price Per Unit: cost of one unit of the item.
-- Total Spent: total spend for the transaction.
-- Payment Method: method used to pay, such as cash, credit card, or digital wallet.
-- Location: where the purchase happened, such as in-store or takeaway.
-- Transaction Date: date on which the transaction was recorded.
-
-## 3) Target and candidate features
-
-The most reasonable target variable is:
-
-- Total Spent
-
-This is the numeric outcome that could be predicted from the other variables.
-
-Candidate features would include:
-
-- Item
-- Quantity
-- Price Per Unit
-- Payment Method
-- Location
-- Transaction Date
-
-These are the variables that could plausibly help explain or predict the amount spent.
-
-Transaction ID is not a useful predictive feature because it is just an identifier and is unique for each row.
+The assignment supplies `prices_with_rainfall.parquet`; place it at `data/processed/prices_with_rainfall.parquet`. It has columns `id`, `date`, `market`, `commodity`, `price`, and `rainfall_mm`. This is the input for `src/analytics/build_analytics.py`. It is distinct from the Lab 3 pipeline output `market_prices_with_rainfall.parquet`.

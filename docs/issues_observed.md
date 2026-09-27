@@ -1,8 +1,11 @@
-- The Payment Method column has a large number of missing values, leaving many rows without a recorded payment type.
-- The Location column also has a large number of missing values, which makes it hard to tell where several transactions occurred.
-- Some entries in the dataset contain the literal value UNKNOWN instead of a valid category, suggesting inconsistent or incomplete data entry.
-- Some cells contain the literal value ERROR in numeric fields, which is not a valid monetary or quantity value and indicates data corruption or formatting problems.
-- The Total Spent column contains entries that are not plausible numeric amounts, suggesting invalid data in the raw file.
-- The Transaction Date column includes values that do not appear to be valid dates or are missing, which raises concerns about record quality.
-- Several rows appear to have inconsistent or duplicate-looking transaction records, which could indicate repeated entries or poor data capture.
-- Some Quantity and Price Per Unit values look unrealistic or inconsistent with the recorded totals, suggesting problems in the source data.
+# Observed data-quality issues
+
+The raw market-price source (`data/raw/prices.csv`) contains issues handled by the validation and cleaning stages:
+
+- Non-positive prices are rejected.
+- Repeated IDs and exact duplicate rows are removed.
+- Invalid dates are rejected.
+- Missing or placeholder market values are imputed when a valid mode exists.
+- Commodity labels with case or spelling variations are normalized and reviewed.
+
+The current raw-data profile is summarized in `validation_report.md`; counts for different rules can overlap, so they should not be added together as unique affected rows. Rainfall may be missing for some market/date observations; the merge intentionally preserves those values as null rather than silently replacing them with zero.

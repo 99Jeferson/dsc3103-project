@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import pandas as pd
 import pytest
 
@@ -8,7 +6,7 @@ from src.ingest.source_b import ingest_source_b
 from src.transform.clean import clean_data
 
 
-def test_clean_data_imputes_missing_market_and_normalizes_commodities():
+def test_clean_data_imputes_missing_market_and_normalizes_commodities(tmp_path):
     df = pd.DataFrame(
         {
             "id": [1, 2],
@@ -19,7 +17,11 @@ def test_clean_data_imputes_missing_market_and_normalizes_commodities():
         }
     )
 
-    cleaned, log = clean_data(df=df, output_path=Path("data/test_clean_output.parquet"), log_path=Path("docs/test_clean_log.csv"))
+    cleaned, log = clean_data(
+        df=df,
+        output_path=tmp_path / "clean.parquet",
+        log_path=tmp_path / "cleaning_log.csv",
+    )
 
     assert cleaned["market"].isna().sum() == 0
     assert set(cleaned["commodity"].unique()) <= {"Beans", "Maize"}

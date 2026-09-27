@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import json
-from urllib.parse import urlencode
-from urllib.request import urlopen
 from pathlib import Path
+from urllib.parse import urlencode #safe import for constructing query strings for URLs
+from urllib.request import urlopen
 
 import pandas as pd
 
@@ -56,7 +56,7 @@ def get_mkt_rainfall(mkt_name, latitude, longitude, start_date, end_date, timezo
             "timezone": timezone,
         }
     )
-    request_url = f"{RAINFALL_URL}?{query}"
+    request_url = f"{RAINFALL_URL}?{query}" # combine the base URL with the query string
     try:
         with urlopen(request_url, timeout=30) as response:
             payload = json.load(response)
