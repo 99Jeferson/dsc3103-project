@@ -20,7 +20,7 @@
   {
     "stage": "join_market_weather",
     "input_rows": 887,
-    "output_rows": 887,
+    "output_rows": 801,
     "errors": []
   }
 ]

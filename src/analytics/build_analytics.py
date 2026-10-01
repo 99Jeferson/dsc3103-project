@@ -1,7 +1,7 @@
 """Build and query the analytical star schema for DSC3103 Lab 4."""
 
 import os
-import time
+import time #timer for measuring performance of queries
 from pathlib import Path
 
 import duckdb as db

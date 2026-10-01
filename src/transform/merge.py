@@ -34,4 +34,4 @@ def merge_prices_with_rainfall(
 		)
 
 	rainfall = rainfall[["market", "date", "rainfall_mm"]]
-	return prices.merge(rainfall, how="left", on=["market", "date"])
+	return prices.merge(rainfall, how="inner", on=["market", "date"])
