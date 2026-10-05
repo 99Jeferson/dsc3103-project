@@ -1,0 +1,28 @@
+services:
+  airflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    image: dsc3103-airflow:local
+    command: standalone
+    ports:
+      - "8080:8080"
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__AUTH_MANAGER: "airflow.api_fastapi.auth.managers.simple.simple_auth_manager.SimpleAuthManager"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: "admin:admin"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_PASSWORDS_FILE: "/opt/airflow/simple_auth_manager_passwords.json.generated"
+      PROJECT_ROOT: /opt/project
+      PYTHONPATH: /opt/project
+      RAINFALL_SOURCE: "${RAINFALL_SOURCE:-csv}"
+    volumes:
+      - ./airflow/dags/market_pipeline_dag.py:/opt/airflow/dags/market_pipeline_dag.py:ro
+      - ./src:/opt/project/src:ro
+      - ./data:/opt/project/data
+      - ./docs:/opt/project/docs
+      - airflow_home:/opt/airflow
+    restart: unless-stopped
+
+volumes:
+  airflow_home:
+
