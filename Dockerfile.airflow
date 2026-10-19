@@ -2,4 +2,4 @@ FROM apache/airflow:3.3.2-python3.12
 
 # Install only the libraries needed by the project's ETL pipeline.
 USER airflow
-RUN pip install --no-cache-dir --retries 5 --timeout 120 "pandas==2.2.3" "pyarrow==19.0.1"
+RUN pip install --no-cache-dir --retries 5 --timeout 120 "pandas==2.2.3" "pyarrow==19.0.1" "duckdb"

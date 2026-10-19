@@ -1,0 +1,7 @@
+{
+  "run_date": "2026-10-12",
+  "run_id": "manual__2026-10-12T11:43:59.567946+00:00",
+  "fact_table_row_count": 801,
+  "joined_input_row_count": 801,
+  "database": "/opt/project/data/processed/analytics.duckdb"
+}
