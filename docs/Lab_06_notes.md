@@ -6,7 +6,7 @@ I generated the skewed 5,000,000-row dataset in `src/scale/skewed_data.py`.
 
 Question: What share of the rows belongs to Owino now, and why did we do this on purpose?
 
-Answer: About 70% of the rows (`0.700`) belong to Owino. We did this on purpose to create a highly skewed dataset so Spark has to shuffle and redistribute records by market. That makes the workload behave more like a real-world data-skew case, where one key dominates and one partition/worker can become a bottleneck.
+Answer: About 70% of the rows belong to Owino. We did this on purpose to create a highly skewed dataset so Spark has to shuffle and redistribute records by market. That makes the workload behave more like a real-world data-skew case, where one key dominates and one partition/worker can become a bottleneck.
 
 ## Step 3 — DuckDB vs Spark
 
