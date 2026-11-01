@@ -1,0 +1,23 @@
+{"event_id": "e1", "market": "kansanga", "commodity": "Maize", "price": 500.0, "event_time": 1793530255.0266793, "reason": "watermark passed"}
+{"event_id": "e4", "market": "bwais", "commodity": "Maize", "price": 500.0, "event_time": 1793530239.4140086, "reason": "watermark passed"}
+{"event_id": "e11", "market": "bwais", "commodity": "Beans", "price": 500.0, "event_time": 1793530239.2504551, "reason": "watermark passed"}
+{"event_id": "e13", "market": "kansanga", "commodity": "Maize", "price": 500.0, "event_time": 1793530247.6439352, "reason": "watermark passed"}
+{"event_id": "e29", "market": "mukono", "commodity": "Maize", "price": 500.0, "event_time": 1793530254.8902626, "reason": "watermark passed"}
+{"event_id": "e41", "market": "bwais", "commodity": "Beans", "price": 500.0, "event_time": 1793530248.4967198, "reason": "watermark passed"}
+{"event_id": "e57", "market": "kansanga", "commodity": "Maize", "price": 500.0, "event_time": 1793530242.024322, "reason": "watermark passed"}
+{"event_id": "e83", "market": "mukono", "commodity": "Maize", "price": 500.0, "event_time": 1793530255.236388, "reason": "watermark passed"}
+{"event_id": "e108", "market": "mukono", "commodity": "Beans", "price": 500.0, "event_time": 1793530253.9728627, "reason": "watermark passed"}
+{"event_id": "e118", "market": "mukono", "commodity": "Maize", "price": 500.0, "event_time": 1793530258.7002838, "reason": "watermark passed"}
+{"event_id": "e153", "market": "bwais", "commodity": "Beans", "price": 500.0, "event_time": 1793530263.0601492, "reason": "window already finalised"}
+{"event_id": "e157", "market": "mukono", "commodity": "Maize", "price": 500.0, "event_time": 1793530261.6014433, "reason": "window already finalised"}
+{"event_id": "e171", "market": "mukono", "commodity": "Beans", "price": 500.0, "event_time": 1793530261.0419014, "reason": "window already finalised"}
+{"event_id": "e184", "market": "bwais", "commodity": "Beans", "price": 500.0, "event_time": 1793530261.8487124, "reason": "window already finalised"}
+{"event_id": "e188", "market": "nakasero", "commodity": "Maize", "price": 500.0, "event_time": 1793530265.1031744, "reason": "window already finalised"}
+{"event_id": "e204", "market": "mukono", "commodity": "Beans", "price": 500.0, "event_time": 1793530265.4334328, "reason": "window already finalised"}
+{"event_id": "e226", "market": "mukono", "commodity": "Beans", "price": 500.0, "event_time": 1793530270.2270598, "reason": "window already finalised"}
+{"event_id": "e234", "market": "nakasero", "commodity": "Maize", "price": 500.0, "event_time": 1793530271.4669456, "reason": "window already finalised"}
+{"event_id": "e244", "market": "kansanga", "commodity": "Maize", "price": 500.0, "event_time": 1793530275.136007, "reason": "window already finalised"}
+{"event_id": "e263", "market": "mukono", "commodity": "Beans", "price": 500.0, "event_time": 1793530278.115608, "reason": "window already finalised"}
+{"event_id": "e265", "market": "kansanga", "commodity": "Maize", "price": 500.0, "event_time": 1793530272.5484843, "reason": "window already finalised"}
+{"event_id": "e268", "market": "bwais", "commodity": "Beans", "price": 500.0, "event_time": 1793530276.5402114, "reason": "window already finalised"}
+{"event_id": "e292", "market": "bwais", "commodity": "Maize", "price": 500.0, "event_time": 1793530275.27168, "reason": "window already finalised"}
