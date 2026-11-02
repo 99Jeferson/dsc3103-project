@@ -1,0 +1,23 @@
+{
+  "model_version": "20261101-141205",
+  "model_type": "LinearRegression",
+  "features": [
+    "rainfall_mm",
+    "month",
+    "market_Owino",
+    "market_Nakasero",
+    "market_Kalerwe",
+    "market_Mbale Central",
+    "market_Gulu Main",
+    "market_Unknown",
+    "commodity_Maize",
+    "commodity_Beans",
+    "commodity_Cassava",
+    "commodity_Rice"
+  ],
+  "n_training_rows": 801,
+  "training_data_path": "data\\processed\\prices_with_rainfall.parquet",
+  "training_data_sha256": "abdac82f3a515f9e159182665c834fc5bf204afd0714dea2f1f13edf229a5dcb",
+  "feature_code_sha256": "bf24b6bf49a2be3168e88a63f2e735af4bd8b059e09ca0807df21a5f1c90bcca",
+  "train_r2": 1.0
+}

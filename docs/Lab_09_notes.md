@@ -28,11 +28,13 @@ In one run of 300 unique events, the consumer caught 18 duplicates. The late-eve
 
 Accepted after the event-time window ended but still inside the watermark: 67 (watermark 5), 140 (watermark 20), and 214 (watermark 40).
 
+In the later verification run, the producer was run to completion before the consumer was started. The broker contained 313 lines (300 unique event IDs and 13 injected duplicates). Because the consumer started after the events had aged beyond the 20-second watermark, it routed all 300 unique events to `late_events.jsonl`, accepted 0 within the watermark, and caught all 13 duplicates. This is a useful demonstration of why the consumer should be started while the producer is still running; those sequential-run counts are not the expected results of a concurrent stream run.
+
 For a fraud alert, I would choose a short watermark such as 5 seconds so alerts arrive sooner, and handle very late records separately. For a daily price report, I would choose a longer watermark such as 40 seconds because completeness matters more than a few seconds of latency. With `IDLE_STOP = 45`, the consumer can stop before the newest window is finalised when the watermark is 40 seconds: a full window plus its watermark can take 50 seconds. A production consumer should allow pending windows to finalise before shutting down.
 
 ## Step 6 — Duplicates and state
 
-The measured run caught 18 duplicate lines. Without the `seen_ids` check, each duplicate would be counted again, inflating the count and price total for its window. The number varies because the producer injects duplicates randomly.
+The first measured run caught 18 duplicate lines, and the later sequential verification run caught 13. Without the `seen_ids` check, each duplicate would be counted again, inflating the count and price total for its window. The number varies because the producer injects duplicates randomly.
 
 `seen_ids` uses memory proportional to the number of unique event IDs. At 10 million events per day, retaining every ID indefinitely would keep consuming more memory. One option is to expire IDs after a retention period. The trade-off is that a duplicate arriving after its ID expires can be counted again. A Bloom filter uses less memory but can incorrectly classify a new ID as a duplicate.
 
